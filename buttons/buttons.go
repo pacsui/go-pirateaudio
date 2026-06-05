@@ -1,11 +1,9 @@
 package buttons
 
 import (
-	"fmt"
 	"log"
 
-	"periph.io/x/conn/v3/gpio"
-	"periph.io/x/conn/v3/gpio/gpioreg"
+	"github.com/warthog618/go-gpiocdev"
 	"periph.io/x/host/v3"
 )
 
@@ -33,13 +31,23 @@ func OnButtonYPressed(fn func()) {
 
 func onButtonPressed(n int, fn func()) {
 	go func() {
-		p := gpioreg.ByName(fmt.Sprintf("GPIO%d", n))
-		if err := p.In(gpio.PullUp, gpio.FallingEdge); err != nil {
+		c, err := gpiocdev.NewChip("/dev/gpiochip0")
+		if err != nil {
 			log.Fatal(err)
 		}
+		defer c.Close()
+		line, err := c.RequestLine(n,
+			gpiocdev.WithPullUp,
+			gpiocdev.WithFallingEdge,
+			gpiocdev.WithEventHandler(func(evt gpiocdev.LineEvent) {
+				fn()
+			}),
+		)
+		if err != nil {
+			log.Fatal(err)
+		}
+		defer line.Close()
 		for {
-			p.WaitForEdge(-1)
-			fn()
 		}
 	}()
 }
