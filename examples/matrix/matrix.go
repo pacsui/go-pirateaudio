@@ -3,7 +3,7 @@ package main
 import (
 	"time"
 
-	"github.com/rubiojr/go-pirateaudio/textview"
+	"github.com/pacsui/go-pirateaudio/textview"
 )
 
 func main() {

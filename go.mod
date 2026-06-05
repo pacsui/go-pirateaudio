@@ -5,16 +5,15 @@ go 1.26.0
 require (
 	github.com/fogleman/gg v1.3.0
 	github.com/muesli/reflow v0.3.0
-	github.com/rubiojr/go-pirateaudio v0.0.0-20240620105206-e7f0a1f5f0d9
 	github.com/warthog618/go-gpiocdev v0.9.1
-	periph.io/x/conn/v3 v3.7.0
-	periph.io/x/host/v3 v3.8.2
+	periph.io/x/conn/v3 v3.7.3
+	periph.io/x/host/v3 v3.8.5
 )
 
 require (
+	github.com/clipperhouse/uax29/v2 v2.7.0 // indirect
 	github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0 // indirect
-	github.com/mattn/go-runewidth v0.0.12 // indirect
-	github.com/rivo/uniseg v0.2.0 // indirect
-	golang.org/x/image v0.15.0 // indirect
-	golang.org/x/sys v0.18.0 // indirect
+	github.com/mattn/go-runewidth v0.0.24 // indirect
+	golang.org/x/image v0.41.0 // indirect
+	golang.org/x/sys v0.45.0 // indirect
 )
