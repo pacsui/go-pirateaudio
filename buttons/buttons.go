@@ -2,6 +2,7 @@ package buttons
 
 import (
 	"log"
+	"time"
 
 	"github.com/warthog618/go-gpiocdev"
 	"periph.io/x/host/v3"
@@ -39,6 +40,7 @@ func onButtonPressed(n int, fn func()) {
 		line, err := c.RequestLine(n,
 			gpiocdev.WithPullUp,
 			gpiocdev.WithFallingEdge,
+			gpiocdev.WithDebounce(100*time.Millisecond),
 			gpiocdev.WithEventHandler(func(evt gpiocdev.LineEvent) {
 				fn()
 			}),
